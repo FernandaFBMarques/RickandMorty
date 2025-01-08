@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             ) {
                 if (response.isSuccessful){
                     val characters = response.body()?.results
-                    Log.d("MainActivity", "Characters: $characters")
+                    characters?.forEach { character-> Log.d("MainActivity", "Characters: ${character.name}")}
                 } else {
                     Log.e("MainActivity", "Error: ${response.code()}")
                 }
