@@ -1,47 +1,55 @@
 package com.example.rickandmortyapp
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.rickandmortyapp.ui.theme.RickandMortyAppTheme
+import android.util.Log
+import com.example.rickandmortyapp.databinding.ActivityMainBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class MainActivity : ComponentActivity() {
+
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            RickandMortyAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.apply{
+            //binding.welcome.text = "Sample viewBinding"
+            binding.btnSample.setOnClickListener{
+                fetchCharacters()
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+    private fun fetchCharacters() {
+        val api = NetworkUtils
+            .getRetrofitInstance("https://rickandmortyapi.com/api/")
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    RickandMortyAppTheme {
-        Greeting("Android")
+        val endpoint = api.create(RickAndMortyApi::class.java)
+        val callback = endpoint.getCharacters(1)
+
+        callback.enqueue(object : Callback<CharacterResponse>{
+            override fun onResponse(
+                call: Call<CharacterResponse>,
+                response: Response<CharacterResponse>
+            ) {
+                if (response.isSuccessful){
+                    val characters = response.body()?.results
+                    characters?.forEach { character-> Log.d("MainActivity", "Characters: ${character.name}")}
+                } else {
+                    Log.e("MainActivity", "Error: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<CharacterResponse>, t: Throwable) {
+                Log.e("MainActivity", "Failure: ${t.message}")
+            }
+        })
     }
+
 }
