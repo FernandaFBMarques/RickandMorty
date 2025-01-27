@@ -3,6 +3,7 @@ package com.example.rickandmortyapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.rickandmortyapp.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -10,11 +11,19 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        fetchCharacters()
+        binding.apply{
+            //binding.welcome.text = "Sample viewBinding"
+            binding.btnSample.setOnClickListener{
+                fetchCharacters()
+            }
+        }
     }
 
     private fun fetchCharacters() {
