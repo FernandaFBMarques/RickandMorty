@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.appcompat)
+    implementation("androidx.cardview:cardview:1.0.0")
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     androidTestImplementation(libs.hilt.android.testing)
