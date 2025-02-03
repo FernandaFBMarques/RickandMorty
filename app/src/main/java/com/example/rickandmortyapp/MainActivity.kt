@@ -11,9 +11,7 @@ import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
-    private var character: List<Character> = emptyList()
     private val characterAdapter: CharacterAdapter by lazy {
         CharacterAdapter()
     }
@@ -22,24 +20,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        character = fetchCharacters()
+        fetchCharacters{ characterAdapter.submitList(it) }
         binding.rvRecycler
             .apply{
                 layoutManager= LinearLayoutManager(this@MainActivity)
                 adapter = characterAdapter}
 
-        binding.apply{
-            characterAdapter.submitList(character)
-        }
     }
 
-    private fun fetchCharacters() : List<Character>{
+    private fun fetchCharacters(onResult:(List<Character>)->Unit){
         val api = NetworkUtils
             .getRetrofitInstance("https://rickandmortyapi.com/api/")
-
         val endpoint = api.create(RickAndMortyApi::class.java)
         val callback = endpoint.getCharacters(1)
-        var listCharacter = emptyList<Character>()
 
         callback.enqueue(object : Callback<CharacterResponse>{
             override fun onResponse(
@@ -47,19 +40,19 @@ class MainActivity : AppCompatActivity() {
                 response: Response<CharacterResponse>
             ) {
                 if (response.isSuccessful){
-                    listCharacter = response.body()?.results ?: emptyList()
-                    listCharacter?.forEach { character-> Log.d("MainActivity", "Characters: ${character.name}")}
-
+                    val listCharacter = response.body()?.results ?: emptyList()
+                    onResult(listCharacter)
                 } else {
                     Log.e("MainActivity", "Error: ${response.code()}")
+                    onResult(emptyList())
                 }
             }
 
             override fun onFailure(call: Call<CharacterResponse>, t: Throwable) {
                 Log.e("MainActivity", "Failure: ${t.message}")
+                onResult(emptyList())
             }
         })
-        return listCharacter
     }
 
 }

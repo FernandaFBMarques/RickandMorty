@@ -90,22 +90,6 @@
                 android:textColor="@android:color/darker_gray" />
 
             <TextView
-                android:id="@+id/episode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Episode"
-                android:textSize="14sp"
-                android:textColor="@android:color/darker_gray" />
-
-            <TextView
-                android:id="@+id/url"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="url"
-                android:textSize="14sp"
-                android:textColor="@android:color/darker_gray" />
-
-            <TextView
                 android:id="@+id/created"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

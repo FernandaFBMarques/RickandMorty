@@ -1,6 +1,6 @@
 package com.example.rickandmortyapp
+import android.util.Log
 import android.view.LayoutInflater
-
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ListAdapter
@@ -12,6 +12,7 @@ class CharacterAdapter : ListAdapter<Character, CharacterAdapter.CharacterHolder
     inner class CharacterHolder(val binding: CharactersBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(character: Character) {
+            Log.d("nanan", "{$character}")
             binding.name.text = character.name
             binding.status.text = character.status
             binding.species.text = character.species
@@ -19,12 +20,10 @@ class CharacterAdapter : ListAdapter<Character, CharacterAdapter.CharacterHolder
             binding.gender.text = character.gender
             binding.origin.text = character.origin.name
             binding.location.text = character.location.name
-            binding.episode.text = character.episode.toString()
-            binding.url.text = character.url
             binding.created.text = character.created
 
-            Glide.with(binding.root.context)
-                .load(character.url).
+            Glide.with(binding.imageView.context)
+                .load(character.image).
                 into(binding.imageView)
         }
     }
