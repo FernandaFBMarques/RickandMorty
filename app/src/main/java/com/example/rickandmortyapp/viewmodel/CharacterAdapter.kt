@@ -1,18 +1,19 @@
-package com.example.rickandmortyapp
-import android.util.Log
+package com.example.rickandmortyapp.viewmodel
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ListAdapter
 import com.example.rickandmortyapp.databinding.CharactersBinding
 import com.bumptech.glide.Glide
+import com.example.rickandmortyapp.model.Character
 
-class CharacterAdapter : ListAdapter<Character, CharacterAdapter.CharacterHolder>(CharacterDiffCallback()) {
+class CharacterAdapter : ListAdapter<Character, CharacterAdapter.CharacterHolder>(
+    CharacterDiffCallback()
+) {
 
     inner class CharacterHolder(val binding: CharactersBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(character: Character) {
-            Log.d("nanan", "{$character}")
             binding.name.text = character.name
             binding.status.text = character.status
             binding.species.text = character.species

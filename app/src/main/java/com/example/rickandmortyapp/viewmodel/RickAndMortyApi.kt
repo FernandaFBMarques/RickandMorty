@@ -1,5 +1,6 @@
-package com.example.rickandmortyapp
+package com.example.rickandmortyapp.viewmodel
 
+import com.example.rickandmortyapp.model.CharacterResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
