@@ -9,10 +9,10 @@ import retrofit2.Response
 
 class FetchCharacters {
     companion object{
-        fun fetchCharacters(onResult:(List<Character>)->Unit){
+        fun fetchCharacters(page: Int, onResult:(List<Character>)->Unit){
             val api = NetworkUtils.getRetrofitInstance("https://rickandmortyapi.com/api/")
             val endpoint = api.create(RickAndMortyApi::class.java)
-            val callback = endpoint.getCharacters(1)
+            val callback = endpoint.getCharacters(page)
 
             callback.enqueue(object : Callback<CharacterResponse> {
                 override fun onResponse(
