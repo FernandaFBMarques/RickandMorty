@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-
         //binding = ActivityMainBinding.inflate(layoutInflater)
         //setContentView(binding.root)
 
