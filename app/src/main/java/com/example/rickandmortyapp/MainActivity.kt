@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.rickandmortyapp.ui.character.Character
+import com.example.rickandmortyapp.ui.character.CharacterAdapter
+import com.example.rickandmortyapp.ui.character.CharacterResponse
 import com.example.rickandmortyapp.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback

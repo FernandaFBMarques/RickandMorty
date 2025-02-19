@@ -1,5 +1,7 @@
-package com.example.rickandmortyapp
+package com.example.rickandmortyapp.ui.character
 
+import com.example.rickandmortyapp.Location
+import com.example.rickandmortyapp.Origin
 import com.google.gson.annotations.SerializedName
 
 data class Character (

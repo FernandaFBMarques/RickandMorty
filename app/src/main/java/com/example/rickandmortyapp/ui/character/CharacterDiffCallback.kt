@@ -1,4 +1,4 @@
-package com.example.rickandmortyapp
+package com.example.rickandmortyapp.ui.character
 
 import androidx.recyclerview.widget.DiffUtil
 
