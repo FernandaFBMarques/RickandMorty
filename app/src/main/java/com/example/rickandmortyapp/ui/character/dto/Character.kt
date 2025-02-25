@@ -1,9 +1,10 @@
-package com.example.rickandmortyapp.ui.character
+package com.example.rickandmortyapp.ui.character.dto
 
-import com.example.rickandmortyapp.Location
-import com.example.rickandmortyapp.Origin
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Character (
     @SerializedName("id")
     val id: Int,
@@ -29,4 +30,4 @@ data class Character (
     val url: String,
     @SerializedName("created")
     val created: String
-)
+) : Parcelable

@@ -1,6 +1,5 @@
-package com.example.rickandmortyapp.ui.character
+package com.example.rickandmortyapp.ui.character.dto
 
-import com.example.rickandmortyapp.Info
 import com.google.gson.annotations.SerializedName
 
 data class CharacterResponse (

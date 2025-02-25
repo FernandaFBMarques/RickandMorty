@@ -1,4 +1,4 @@
-package com.example.rickandmortyapp.ui.character
+package com.example.rickandmortyapp.ui.character.list
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ListAdapter
 import com.example.rickandmortyapp.databinding.CharactersBinding
 import com.bumptech.glide.Glide
+import com.example.rickandmortyapp.ui.character.dto.Character
 
 class CharacterAdapter : ListAdapter<Character, CharacterAdapter.CharacterHolder>(
     CharacterDiffCallback()
